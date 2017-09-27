@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.3/Tone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rita/1.2.12/rita-full.js"></script>
+    <script src="/script.js"></script>
+    
+    
+    <style>
+      body {
+        padding: 20px;
+      }
+      .text {
+        border-style: solid;
+        border-width: 1px;
+        padding: 20px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <h3>Compose your lyrics in the box below:</h3>
+
+    <p><input id="sentence" value="If music be the food of love play on!" style="width:400px;"></p>
+  
+<!--     <p id="results"></p> -->
+    <hr>
+    <p></p>
+    <hr>
+    <p id="results"></p>
+    <hr>
+    <p></p>
+    <hr>
+    <p></p>
+    <hr>
+    
+    <p>
+      <button id="submit">submit</button>
+      <button id="clear">start over</button>
+    </p>
+
+  </body>
+</html>
