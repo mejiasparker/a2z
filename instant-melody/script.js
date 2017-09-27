@@ -3,9 +3,6 @@ function setup() {
 noCanvas();
 
 // select text input field
-  
-  
-
 input = select('#sentence');
   
 let submitbutton = select('#submit');
@@ -14,42 +11,37 @@ submitbutton.mousePressed(createSpans);
 let clearbutton = select('#clear');
 clearbutton.mousePressed(clearP);
   
-function clearP(){
-  
-  let textresult = select('#results');
-  textresult.style('border-style', 'hidden');
-  textresult.html('');
-  
-}
+  function clearP(){
 
-function createSpans(){
-  let string = input.value();
-  string = string.replace(/[.,:;!@#$%&*()\n]+/, '');
-  let wordarray = string.split(' ');
-
-  //console.log(wordarray);
-
-  let output = '';
-  let textresult = select('#results');
-  // textresult.class('text');
-  // textresult.style('border-style', 'solid');
-  
-  //let par = createP(output).class('text');
-
-  for (let i=0; i < wordarray.length; i++){
-    let span = createSpan(wordarray[i]);
-    span.parent(textresult);
-    createSpan(' ').parent(textresult);
-
-    span.mouseOver(highlight);
-    span.mouseOut(unhighlight);
-    span.mousePressed(clickWord);
-
-  //if you want to chain it
-  //createSpan(‘ ’).parent(‘id_name’);
+    let textresult = select('#results');
+    textresult.style('border-style', 'hidden');
+    textresult.html('');
 
   }
-}
+
+  function createSpans(){
+    let string = input.value();
+    string = string.replace(/[.,:;!@#$%&*()\n]+/, '');
+    let wordarray = string.split(' ');
+
+    //console.log(wordarray);
+
+    let output = '';
+    let textresult = select('#results');
+    // textresult.class('text');
+    // textresult.style('border-style', 'solid');
+
+    for (let i=0; i < wordarray.length; i++){
+      let span = createSpan(wordarray[i]);
+      span.parent(textresult);
+      createSpan(' ').parent(textresult);
+
+      span.mouseOver(highlight);
+      span.mouseOut(unhighlight);
+      span.mousePressed(clickWord);
+
+    }
+  }
 
   
 posobject = {
@@ -130,66 +122,30 @@ pentaobject =  {
   
 context = new (window.AudioContext || window.webkitAudioContext)();
   
-function clickWord() {
-  let word = this.html();
+  function clickWord() {
+    let word = this.html();
+
+    let rs = new RiString(word);
+    let partofspeech = rs.pos();
+
+
+    let osc = context.createOscillator(); // instantiate an oscillator
+    osc.type = 'sine'; // this is the default - also square, sawtooth, triangle
+    osc.frequency.value = pentaobject[partofspeech]; // Hz
+    osc.connect(context.destination); // connect it to the destination
+    osc.start(); // start the oscillator
+    osc.stop(context.currentTime + .5); // stop 2 seconds after the current time
+
+    // console.log(word);
+    // this.html('replace');
+  }
+
+  function highlight() {
+    this.style('background-color', '#AAA');
+  }
+
+  function unhighlight() {
+    this.style('background-color', 'transparent');
+  }
   
-  let rs = new RiString(word);
-  let partofspeech = rs.pos();
-  
-
-  let osc = context.createOscillator(); // instantiate an oscillator
-  osc.type = 'sine'; // this is the default - also square, sawtooth, triangle
-  osc.frequency.value = pentaobject[partofspeech]; // Hz
-  osc.connect(context.destination); // connect it to the destination
-  osc.start(); // start the oscillator
-  osc.stop(context.currentTime + .5); // stop 2 seconds after the current time
-  
-  // console.log(word);
-  // this.html('replace');
-}
-
-function highlight() {
-  this.style('background-color', '#AAA');
-}
-
-function unhighlight() {
-  this.style('background-color', 'transparent');
-}
-  
-//   let lexicon = new RiLexicon();
-
-//   // Make a text input field
-//   input = select('#sentence');
-//   // Make a submit button
-//   let button1 = select('#pos');
-//   button1.mousePressed(posSwap);
-//   let button2 = select('#rhyme');
-//   button2.mousePressed(rhymeSwap);
-
-//   function posSwap() {
-//     let sentence = input.value();
-//     let rs = new RiString(sentence);
-//     let pos = rs.pos();
-
-//     let output = '';
-//     for (let i = 0; i < pos.length; i++) {
-//       output += lexicon.randomWord(pos[i]);
-//       output += ' ';
-//     }
-//     createP(output).class('text');
-//   }
-
-//   function rhymeSwap() {
-//     let sentence = input.value();
-//     let output = sentence.replace(/\b\w+\b/g, replacer);
-//     createP(output).class('text');
-//     function replacer(match) {
-//       let rhymes = lexicon.rhymes(match);
-//       if (rhymes.length > 0) {
-//         return random(rhymes);
-//       } else {
-//         return match;
-//       }
-//     }
-//   }
 }
