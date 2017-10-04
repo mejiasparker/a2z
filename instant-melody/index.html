@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.3/Tone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rita/1.2.12/rita-full.js"></script>
     <script src="/script.js"></script>
     
@@ -17,6 +16,12 @@
     <style>
       body {
         padding: 20px;
+      }
+      div {
+      	cursor: url('https://cdn.glitch.com/e869a12a-600a-44d7-8141-79776bd2cebb%2Fbaton.png?1507082559830'), auto;
+      }
+      span {
+        padding: 5px;
       }
       .text {
         border-style: solid;
@@ -31,16 +36,7 @@
 
     <p><input id="sentence" value="If music be the food of love play on!" style="width:400px;"></p>
   
-<!--     <p id="results"></p> -->
-    <hr>
-    <p></p>
-    <hr>
-    <p id="results"></p>
-    <hr>
-    <p></p>
-    <hr>
-    <p></p>
-    <hr>
+    <div id="results"></div>
     
     <p>
       <button id="submit">submit</button>
